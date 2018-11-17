@@ -1,0 +1,10 @@
+<section>
+  <mat-card class="mat-whiteframe-2dp" *ngFor="let movie of movies">
+    <mat-card-title-group>
+      <img mat-card-md-image src="{{ movie.Poster }}">
+      <mat-card-title>
+        <span>{{ movie.Title }}</span>
+      </mat-card-title>
+    </mat-card-title-group>
+  </mat-card>
+</section>

@@ -1,0 +1,46 @@
+@media (min-width: 768px) {
+  :host(.wide) mat-card,
+  :host(.wide) mat-list-item{
+    width: 600px;
+  }
+}
+
+mat-card,
+mat-list-item {
+  color: rgba(0,0,0,0.87);
+  background-color: white;
+  margin: 10px;
+  width: 360px;
+}
+
+mat-card:hover {
+  box-shadow: 0 11px 15px -7px rgba(0,0,0,.2),
+  0 24px 38px 3px rgba(0,0,0,.14),
+  0 9px 46px 8px rgba(0,0,0,.12);
+}
+
+mat-list-item {
+  height: 22px;
+  padding: 0;
+  margin-left: -12px;
+  font-size: 14px;
+}
+
+mat-card-title {
+  margin-bottom: 0;
+}
+
+mat-card-title span {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+mat-card-subtitle.contact-info {
+  margin-top: -7px;
+  height: 20px;
+}
+
+mat-card-title-group {
+  margin-bottom: 20px;
+}
