@@ -1,5 +1,5 @@
 <section>
-  <mat-card class="mat-whiteframe-2dp" *ngFor="let movie of movies">
+  <mat-card (click)="navigate(movie)" class="mat-whiteframe-2dp" *ngFor="let movie of movies">
     <mat-card-title-group>
       <img mat-card-md-image src="{{ movie.Poster }}">
       <mat-card-title>

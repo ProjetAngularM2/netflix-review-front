@@ -6,6 +6,7 @@ import {DialogUserComponent} from '../shared/dialog/user/dialog.user.component';
 import {filter, flatMap} from 'rxjs/operators';
 import {User} from '../shared/interfaces/user';
 import {Observable, of} from 'rxjs';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class HomeComponent implements OnInit {
   private _movies: Movie[];
 
 
-  constructor(private _moviesServie: MoviesService) {
+  constructor(private _moviesServie: MoviesService, private _router: Router) {
     this._movies = [];
   }
 
@@ -30,6 +31,13 @@ export class HomeComponent implements OnInit {
 
   get movies(): Movie[] {
     return this._movies;
+  }
+
+  /**
+   * Function to navigate to current person
+   */
+  navigate(movie: Movie) {
+    this._router.navigate([ '/movie', movie.imdbID ]);
   }
 
 

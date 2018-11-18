@@ -1,0 +1,24 @@
+<mat-card class="mat-whiteframe-2dp">
+  <mat-card-title-group>
+    <img mat-card-md-image src="{{ movie.Poster }}">
+    <mat-card-title>
+      <span>{{ movie.Title }}</span>
+    </mat-card-title>
+  </mat-card-title-group>
+
+
+  <mat-card-content>
+    <div class="contact-info">
+      Released&nbsp;:&nbsp;<span> {{movie.Released}} </span>
+    </div>
+    <div class="contact-info">
+      Genre&nbsp;:&nbsp;<span> {{movie.Genre}} </span>
+    </div>
+    <div class="contact-info">
+      Plot&nbsp;:&nbsp;<span> {{movie.Plot}} </span>
+    </div>
+    <div class="contact-info">
+      Metacritic&nbsp;:&nbsp;<span> {{movie.Metascore}} </span>
+    </div>
+  </mat-card-content>
+</mat-card>

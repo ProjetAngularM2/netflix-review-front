@@ -9,13 +9,17 @@ import {HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
 import {DialogUserComponent} from './shared/dialog/user/dialog.user.component';
 import {FormUserComponent} from './shared/form/user/form.user.component';
+import { MovieComponent } from './movie/movie.component';
+import {CardComponent} from './shared/card/card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     DialogUserComponent,
-    FormUserComponent
+    FormUserComponent,
+    MovieComponent,
+    CardComponent
   ],
   entryComponents: [ DialogUserComponent ],
   imports: [

@@ -23,4 +23,8 @@ export class MoviesService {
     const rand = Math.round(Math.random() * this.MOVIES.length);
     return this._httpClient.get<Movie>(this._url + 'i=' + MOVIES[rand]);
   }
+
+  fetchMovie(id: string): Observable<Movie> {
+    return this._httpClient.get<Movie>(this._url + 'i=' + id);
+  }
 }
