@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {MoviesService} from '../shared/services/movies.service';
 import {Movie} from '../shared/interfaces/movie';
-import {MOVIES} from '../../assets/data/movies';
+import {MatDialog, MatDialogRef} from '@angular/material';
+import {DialogUserComponent} from '../shared/dialog/user/dialog.user.component';
+import {filter, flatMap} from 'rxjs/operators';
+import {User} from '../shared/interfaces/user';
+import {Observable, of} from 'rxjs';
+
 
 @Component({
   selector: 'app-home',
@@ -11,7 +16,9 @@ import {MOVIES} from '../../assets/data/movies';
 export class HomeComponent implements OnInit {
 
   private _movies: Movie[];
-  constructor(private _moviesServie: MoviesService ) {
+
+
+  constructor(private _moviesServie: MoviesService) {
     this._movies = [];
   }
 
@@ -24,5 +31,6 @@ export class HomeComponent implements OnInit {
   get movies(): Movie[] {
     return this._movies;
   }
+
 
 }
