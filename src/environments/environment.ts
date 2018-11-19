@@ -9,7 +9,8 @@ export const environment = {
     host: '127.0.0.1',
     port: '4443',
     endpoints: {
-      registrationUser: '/api/users'
+      registrationUser: '/api/users',
+      connectionUser: '/api/users/connection'
     }
   }
 };

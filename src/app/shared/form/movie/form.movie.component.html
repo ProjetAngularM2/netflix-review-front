@@ -1,0 +1,80 @@
+<h2 mat-dialog-title>Add Movie</h2>
+
+<mat-dialog-content>
+  <form novalidate [formGroup]="formSearch">
+
+    <table class="full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="full-width" [class.mgb15]="formSearch.get('search').dirty && formSearch.get('search').invalid">
+            <input matInput placeholder="Film name" formControlName="search" required name="search"/>
+            <mat-error *ngIf="formSearch.get('search').dirty && formSearch.get('search').hasError('required')">
+              Film name in english is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="cancel()">Cancel</button>
+  <button mat-button color="primary" type="submit" (click)="submitSearch(formSearch.value)" [disabled]="formSearch.invalid">Search</button>
+</mat-dialog-actions>
+
+
+<mat-dialog-content>
+
+  <form novalidate [formGroup]="form">
+
+    <p *ngIf="isUpdateMode">
+      <span style="width:100%">ID (disabled)</span><br/>
+      <span style="width:100%">{{model.id}}</span>
+    </p>
+
+    <table class="full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="full-width" [class.mgb15]="form.get('Title').dirty && form.get('Title').invalid">
+            <input matInput placeholder="Title" formControlName="Title" required name="Title"/>
+            <mat-error *ngIf="form.get('Title').dirty && form.get('Title').hasError('required')">
+              Title is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Released" formControlName="Released" required name="Released"/>
+            <mat-error *ngIf="form.get('Released').dirty && form.get('Released').hasError('required')">
+              Released is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Genre" formControlName="Genre" required name="Genre"/>
+            <mat-error *ngIf="form.get('Genre').dirty && form.get('Genre').hasError('required')">
+              Genre is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Plot" formControlName="Plot"  required name="Plot"/>
+            <mat-error *ngIf="form.get('Plot').dirty && form.get('Plot').hasError('required')">
+              Plot is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Metacritic" formControlName="Metascore" required name="Metascore"/>
+            <mat-error *ngIf="form.get('Metascore').dirty && form.get('Metascore').hasError('Metascore')">
+              Metacritic is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        </tr>
+    </table>
+
+  </form>
+</mat-dialog-content>
+
+
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="cancel()">Cancel</button>
+  <button mat-button color="primary" type="submit" (click)="submit(form.value)" [disabled]="form.invalid">Save</button>
+</mat-dialog-actions>

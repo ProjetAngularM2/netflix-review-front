@@ -1,46 +1,50 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import {User} from '../../interfaces/user';
+import {Movie} from '../../interfaces/movie';
 
 @Component({
-  selector: 'app-form-user',
-  templateUrl: './form.user.component.html',
-  styleUrls: [ './form.user.component.css' ]
+  selector: 'app-form-movie',
+  templateUrl: './form.movie.component.html',
+  styleUrls: [ './form.movie.component.css' ]
 })
-export class FormUserComponent implements OnInit, OnChanges {
+export class FormMovieComponent implements OnInit, OnChanges {
   // private property to store update mode flag
   private _isUpdateMode: boolean;
   // private property to store model value
-  private _model: User;
+  private _model: Movie;
   // private property to store cancel$ value
   private readonly _cancel$: EventEmitter<void>;
   // private property to store submit$ value
-  private readonly _submit$: EventEmitter<User>;
+  private readonly _submit$: EventEmitter<Movie>;
+  private readonly _submitSearch$: EventEmitter<string>;
   // private property to store form value
   private readonly _form: FormGroup;
+  private readonly _formSearch: FormGroup;
 
 
   /**
    * Component constructor
    */
   constructor() {
-    this._submit$ = new EventEmitter<User>();
+    this._submit$ = new EventEmitter<Movie>();
+    this._submitSearch$ = new EventEmitter<string>();
     this._cancel$ = new EventEmitter<void>();
     this._form = this._buildForm();
+    this._formSearch = this._buildFormSearch();
   }
 
   /**
    * Sets private property _model
    */
   @Input()
-  set model(model: User) {
+  set model(model: Movie) {
     this._model = model;
   }
 
   /**
    * Returns private property _model
    */
-  get model(): User {
+  get model(): Movie {
     return this._model;
   }
 
@@ -50,6 +54,13 @@ export class FormUserComponent implements OnInit, OnChanges {
    */
   get form(): FormGroup {
     return this._form;
+  }
+
+  /**
+   * Returns private property _formSearch
+   */
+  get formSearch(): FormGroup {
+    return this._formSearch;
   }
 
   /**
@@ -71,8 +82,13 @@ export class FormUserComponent implements OnInit, OnChanges {
    * Returns private property _submit$
    */
   @Output('submit')
-  get submit$(): EventEmitter<User> {
+  get submit$(): EventEmitter<Movie> {
     return this._submit$;
+  }
+
+  @Output('submitSearch')
+  get submitSearch$(): EventEmitter<String> {
+    return this._submitSearch$;
   }
 
   /**
@@ -91,8 +107,12 @@ export class FormUserComponent implements OnInit, OnChanges {
       this._form.patchValue(this._model);
     } else {
       this._model = {
-        login: '',
-        password: ''
+        Poster: '',
+        Title: '',
+        Released: '',
+        Metascore: '',
+        Genre: '',
+        Plot: ''
       };
       this._isUpdateMode = false;
     }
@@ -106,10 +126,17 @@ export class FormUserComponent implements OnInit, OnChanges {
   }
 
   /**
-   * Function to emit event to submit form and user
+   * Function to emit event to submit form and movie
    */
-  submit(user: User) {
-    this._submit$.emit(user);
+  submit(movie: Movie) {
+    this._submit$.emit(movie);
+  }
+
+  /**
+   * Function to emit event to submit form and movie
+   */
+  submitSearch(s: string) {
+    this._submitSearch$.emit(s);
   }
 
   /**
@@ -118,12 +145,20 @@ export class FormUserComponent implements OnInit, OnChanges {
   private _buildForm(): FormGroup {
     return new FormGroup({
       id: new FormControl('0'),
-      login: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(4)
-      ])),
-      password: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(5)
-      ]))
+      Title: new FormControl('', Validators.required),
+      Genre: new FormControl('', Validators.required),
+      Plot: new FormControl('', Validators.required),
+      Metascore: new FormControl('', Validators.required),
+      Released: new FormControl('', Validators.required)
+    });
+  }
+
+  /**
+   * Function to build our form
+   */
+  private _buildFormSearch(): FormGroup {
+    return new FormGroup({
+      search: new FormControl('', Validators.required)
     });
   }
 }

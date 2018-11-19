@@ -1,5 +1,4 @@
-<h2 mat-dialog-title *ngIf="isUpdateMode">Update {{ form.get('login').value }} </h2>
-<h2 mat-dialog-title *ngIf="!isUpdateMode">Registration</h2>
+<h2 mat-dialog-title>Registration</h2>
 
 <mat-dialog-content>
   <form novalidate [formGroup]="form">
@@ -31,6 +30,7 @@
             </mat-error>
           </mat-form-field>
         </td>
+      </tr>
     </table>
 
   </form>

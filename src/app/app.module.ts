@@ -11,6 +11,8 @@ import {DialogUserComponent} from './shared/dialog/user/dialog.user.component';
 import {FormUserComponent} from './shared/form/user/form.user.component';
 import { MovieComponent } from './movie/movie.component';
 import {CardComponent} from './shared/card/card.component';
+import {FormMovieComponent} from './shared/form/movie/form.movie.component';
+import {DialogMovieComponent} from './shared/dialog/movie/dialog.movie.component';
 
 @NgModule({
   declarations: [
@@ -19,9 +21,11 @@ import {CardComponent} from './shared/card/card.component';
     DialogUserComponent,
     FormUserComponent,
     MovieComponent,
-    CardComponent
+    CardComponent,
+    FormMovieComponent,
+    DialogMovieComponent
   ],
-  entryComponents: [ DialogUserComponent ],
+  entryComponents: [ DialogUserComponent, DialogMovieComponent ],
   imports: [
     BrowserModule,
     AppRoutingModule,

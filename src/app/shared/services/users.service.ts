@@ -41,8 +41,11 @@ export class UsersService {
    * Function to create a new person
    */
   create(user: User): Observable<any> {
-
     return this._http.post<User>(this._backendURL.registrationUser, user, this._options());
+  }
+
+  connection(user: User): Observable<any> {
+    return this._http.post<User>(this._backendURL.connectionUser, user, this._options());
   }
 
 

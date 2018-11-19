@@ -14,8 +14,6 @@ import {UsersService} from './shared/services/users.service';
 })
 export class AppComponent implements OnInit {
 
-  // private property to store dialogStatus value
-  private _dialogStatus: string;
   // private property to store dialog reference
   private _usersDialog: MatDialogRef<DialogUserComponent>;
 
@@ -23,30 +21,20 @@ export class AppComponent implements OnInit {
    * Component constructor
    */
   constructor(private _matIconRegistry: MatIconRegistry, private _domSanitizer: DomSanitizer, private _dialog: MatDialog, private _usersServie: UsersService) {
-    this._dialogStatus = 'inactive';
   }
 
   /**
    * OnInit implementation
    */
   ngOnInit() {
-    this._matIconRegistry.addSvgIcon('icon-account', this._domSanitizer.bypassSecurityTrustResourceUrl('/assets/images/account_circle.svg'));
     this._matIconRegistry.addSvgIcon('icon-registration', this._domSanitizer.bypassSecurityTrustResourceUrl('/assets/images/registration.svg'));
-  }
-
-  /**
-   * Returns private property _dialogStatus
-   */
-  get dialogStatus(): string {
-    return this._dialogStatus;
   }
 
   /**
    * Function to display modal
    */
-  showDialog() {
+  showDialogRegistration() {
     // set dialog status
-    this._dialogStatus = 'active';
 
     // open modal
     this._usersDialog = this._dialog.open(DialogUserComponent, {
@@ -61,18 +49,15 @@ export class AppComponent implements OnInit {
         flatMap(_ => this._add(_))
       )
       .subscribe(
-        (_) => console.log(_.login) ,
-        _ => this._dialogStatus = 'inactive',
-        () => this._dialogStatus = 'inactive'
-      );
+        (_) => console.log(_.login));
   }
 
   /**
    * Add new user
    */
   private _add(user: User): Observable<User> {
-    console.log(user);
      return this._usersServie
      .create(user);
   }
+
 }

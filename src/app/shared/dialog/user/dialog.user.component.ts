@@ -10,6 +10,7 @@ import {User} from '../../interfaces/user';
 })
 export class DialogUserComponent implements OnInit {
 
+
   /**
    * Component constructor
    */
@@ -22,6 +23,7 @@ export class DialogUserComponent implements OnInit {
   get user(): User {
     return this._user;
   }
+
 
   /**
    * OnInit implementation

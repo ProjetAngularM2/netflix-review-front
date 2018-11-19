@@ -51,3 +51,14 @@ mat-card-subtitle.contact-info {
 mat-card-title-group {
   margin-bottom: 20px;
 }
+
+.buttons-fab {
+  display: block;
+  height: 170px;
+  width: 90px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+
