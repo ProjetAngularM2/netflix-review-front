@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Movie} from '../shared/interfaces/movie';
 import {MoviesService} from '../shared/services/movies.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {merge} from 'rxjs';
 import {filter, flatMap, tap} from 'rxjs/operators';
 
@@ -14,7 +14,7 @@ export class MovieComponent implements OnInit {
 
   private _movie: Movie;
 
-  constructor(private _movieService: MoviesService, private _route: ActivatedRoute) {
+  constructor(private _movieService: MoviesService, private _route: ActivatedRoute, private _router: Router) {
     this._movie = {} as Movie;
   }
 
@@ -34,6 +34,10 @@ export class MovieComponent implements OnInit {
 
   get movie(): Movie {
     return this._movie;
+  }
+
+  delete(movie: Movie) {
+    this._movieService.delete(movie).subscribe((_) =>  this._router.navigate(['/home']));
   }
 
 

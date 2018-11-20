@@ -5,7 +5,7 @@ import {Movie, MovieSimple} from '../interfaces/movie';
 import {MOVIES} from '../../../assets/data/movies';
 import {environment} from '../../../environments/environment';
 import {ɵMetadataOverrider} from '@angular/core/testing';
-import {defaultIfEmpty, filter} from 'rxjs/operators';
+import {defaultIfEmpty, filter, map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -75,6 +75,10 @@ export class MoviesService {
 
   create(movie: Movie): Observable<any> {
     return this._httpClient.post<Movie>(this._backendURL.allMovies, movie, this._options());
+  }
+
+  delete(movie: Movie): Observable<any> {
+    return this._httpClient.delete(this._backendURL.updateMovie.replace(':id', movie.id));
   }
 
   /**
