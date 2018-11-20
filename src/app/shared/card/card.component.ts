@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { of } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
+import {filter, flatMap} from 'rxjs/operators';
 import { Router } from '@angular/router';
 import {Movie} from '../interfaces/movie';
+import {DialogMovieComponent} from '../dialog/movie/dialog.movie.component';
+import {MatDialog, MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-card',
@@ -13,10 +15,11 @@ export class CardComponent implements OnInit {
   // private property to store movie value
   private _movie: Movie;
 
+
   /**
    * Component constructor
    */
-  constructor(private _router: Router) {
+  constructor() {
     this._movie = {} as Movie;
   }
 
@@ -40,4 +43,5 @@ export class CardComponent implements OnInit {
    */
   ngOnInit() {
   }
+
 }
