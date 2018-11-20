@@ -13,6 +13,7 @@ import { MovieComponent } from './movie/movie.component';
 import {CardComponent} from './shared/card/card.component';
 import {FormMovieComponent} from './shared/form/movie/form.movie.component';
 import {DialogMovieComponent} from './shared/dialog/movie/dialog.movie.component';
+import { UpdateComponent } from './update/update.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {DialogMovieComponent} from './shared/dialog/movie/dialog.movie.component
     MovieComponent,
     CardComponent,
     FormMovieComponent,
-    DialogMovieComponent
+    DialogMovieComponent,
+    UpdateComponent
   ],
   entryComponents: [ DialogUserComponent, DialogMovieComponent ],
   imports: [

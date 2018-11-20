@@ -11,7 +11,8 @@ export const environment = {
     endpoints: {
       registrationUser: '/api/users',
       allMovies: '/api/movies',
-      oneMovies: '/api/movies/:id'
+      oneMovie: '/api/movies/:id',
+      updateMovie: '/api/movies/:id'
     }
   }
 };
