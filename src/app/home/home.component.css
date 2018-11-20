@@ -61,4 +61,7 @@ mat-card-title-group {
   right: 0;
 }
 
-
+img {
+  border-radius: 50%;
+  margin-right: 18px;
+}

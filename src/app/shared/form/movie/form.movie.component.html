@@ -34,8 +34,12 @@
       <span style="width:100%">{{model.id}}</span>
     </p>
 
+
     <table class="full-width" cellspacing="0">
       <tr>
+        <td class="align-left">
+          <img width="112" src="{{ model.Poster }}"/>
+        </td>
         <td>
           <mat-form-field class="full-width">
             <input matInput placeholder="Title" formControlName="Title" required name="Title"/>

@@ -6,6 +6,12 @@
         <span>{{ movie.Title }}</span>
       </mat-card-title>
     </mat-card-title-group>
+    <mat-card-content>
+      <div class="contact-info">
+        &nbsp;<span  *ngIf="!!movie.Ratings"> {{movie.Ratings.length}} Opinions </span>
+        <span  *ngIf="!movie.Ratings"> 0 Opinions </span>
+      </div>
+    </mat-card-content>
   </mat-card>
 </section>
 
