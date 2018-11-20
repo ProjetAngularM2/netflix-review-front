@@ -20,7 +20,7 @@
     <div class="contact-info">
       Metacritic&nbsp;:&nbsp;<span> {{movie.Metascore}} </span>
     </div>
-    <a mat-button title="Edit" [routerLink]="['/edit', movie.id]">
+    <a mat-button title="Edit" (click)="navigate()">
       <i class="material-icons">add</i>
     </a>
   </mat-card-content>
