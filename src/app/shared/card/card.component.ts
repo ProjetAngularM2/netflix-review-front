@@ -35,7 +35,7 @@ export class CardComponent implements OnInit {
   }
 
   navigate() {
-    this._router.navigate(['/movie', this._movie.imdbID]);
+    this._router.navigate(['/edit', this._movie.id]);
   }
 
   /**

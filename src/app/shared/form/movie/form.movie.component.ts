@@ -101,7 +101,7 @@ export class FormMovieComponent implements OnInit, OnChanges {
    * Function to handle component update
    */
   ngOnChanges(record) {
-    if (record.model && record.model.currentValue && record.model.currentValue.address) {
+    if (record.model && record.model.currentValue) {
       this._model = record.model.currentValue;
       this._isUpdateMode = true;
       this._form.patchValue(this._model);
