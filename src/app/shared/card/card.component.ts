@@ -40,6 +40,10 @@ export class CardComponent implements OnInit {
     this._router.navigate(['/edit', this._movie.id]);
   }
 
+  addComment() {
+    this._router.navigate(['/rate', this._movie.id]);
+  }
+
   /**
    * OnInit implementation
    */
