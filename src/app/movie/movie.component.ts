@@ -22,7 +22,7 @@ export class MovieComponent implements OnInit {
     merge(
       this._route.params.pipe(
         filter(params => !!params['id']),
-        flatMap(params => this._movieService.fetchMovie(params['id']))
+        flatMap(params => this._movieService.fetchMovieByIdBDD(params['id']))
       ),
       this._route.params.pipe(
         filter(params => !params['id']),

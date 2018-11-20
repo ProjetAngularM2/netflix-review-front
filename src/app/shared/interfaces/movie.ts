@@ -31,3 +31,13 @@ export interface Rate {
   Source: string;
   Value: string;
 }
+
+export interface MovieSimple {
+  id?: string;
+  Title?: string;
+  Year?: string;
+  Genre?: string;
+  Plot?: string;
+  Ratings?: Rate[];
+  Metascore?: string;
+}

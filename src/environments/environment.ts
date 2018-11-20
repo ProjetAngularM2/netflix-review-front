@@ -10,7 +10,8 @@ export const environment = {
     port: '4443',
     endpoints: {
       registrationUser: '/api/users',
-      allMovies: '/api/movies'
+      allMovies: '/api/movies',
+      oneMovies: '/api/movies/:id'
     }
   }
 };

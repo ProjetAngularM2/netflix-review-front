@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MoviesService} from '../shared/services/movies.service';
-import {Movie} from '../shared/interfaces/movie';
+import {Movie, MovieSimple} from '../shared/interfaces/movie';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {filter, flatMap, map} from 'rxjs/operators';
 import {Router} from '@angular/router';
@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
    * Function to navigate to current person
    */
   navigate(movie: Movie) {
-    this._router.navigate(['/movie', movie.imdbID]);
+    this._router.navigate(['/movie', movie.id]);
   }
 
   /**
@@ -70,22 +70,32 @@ export class HomeComponent implements OnInit {
    * Add new movie
    */
   private _add(movie: any): Observable<Movie[]> {
-    movie.id = '0';
+     movie.id = '0';
     if (movie.Title === undefined) {
-      console.log('Search');
-      // movieSearch.id = '0';
       return this._moviesServie.fetchMovieByName(movie.search)
         .pipe(
-          flatMap((m: any) => this._add(m.Search[0]))
+          flatMap((m: any) => this._moviesServie.fetchMovie(m.Search[0].imdbID)),
+          flatMap((m: Movie) => this._changeField(m))
         );
     } else {
-      console.log(movie);
       return this._moviesServie
         .create(movie)
         .pipe(
           flatMap(_ => this._moviesServie.fetchAllMovie())
         );
     }
+  }
+
+  private _changeField(movie: Movie): Observable<Movie[]> {
+    const res = {
+      'Title': movie.Title,
+      'Year': movie.Year,
+      'Plot': movie.Plot,
+      'Poster': movie.Poster,
+      'Genre': movie.Genre,
+      'Metascore': movie.Metascore
+    };
+    return this._add(res);
   }
 
 

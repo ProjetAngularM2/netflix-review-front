@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
-import {Movie} from '../interfaces/movie';
+import {Movie, MovieSimple} from '../interfaces/movie';
 import {MOVIES} from '../../../assets/data/movies';
 import {environment} from '../../../environments/environment';
 import {ɵMetadataOverrider} from '@angular/core/testing';
@@ -40,13 +40,16 @@ export class MoviesService {
     return this._httpClient.get<Movie>(this._url + 'i=' + MOVIES[rand]);
   }
 
-  // todo modifer
-  fetchMovie(id: string): Observable<Movie> {
-    return this._httpClient.get<Movie>(this._url + 'i=' + id);
+  fetchMovie(id: string): Observable<MovieSimple> {
+    return this._httpClient.get<MovieSimple>(this._url + 'i=' + id);
   }
 
   fetchMovieByName(name: string) {
     return this._httpClient.get<Movie>(this._url + 's=' + name);
+  }
+
+  fetchMovieByIdBDD(id: string) {
+    return this._httpClient.get<Movie>(this._backendURL.oneMovies.replace(':id', id));
   }
 
   create(movie: Movie): Observable<any> {

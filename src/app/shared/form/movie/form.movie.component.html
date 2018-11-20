@@ -6,7 +6,7 @@
     <table class="full-width" cellspacing="0">
       <tr>
         <td>
-          <mat-form-field class="full-width" [class.mgb15]="formSearch.get('search').dirty && formSearch.get('search').invalid">
+          <mat-form-field class="full-width">
             <input matInput placeholder="Film name" formControlName="search" required name="search"/>
             <mat-error *ngIf="formSearch.get('search').dirty && formSearch.get('search').hasError('required')">
               Film name in english is <strong>required</strong>
@@ -36,16 +36,19 @@
     <table class="full-width" cellspacing="0">
       <tr>
         <td>
-          <mat-form-field class="full-width" [class.mgb15]="form.get('Title').dirty && form.get('Title').invalid">
+          <mat-form-field class="full-width">
             <input matInput placeholder="Title" formControlName="Title" required name="Title"/>
             <mat-error *ngIf="form.get('Title').dirty && form.get('Title').hasError('required')">
               Title is <strong>required</strong>
             </mat-error>
           </mat-form-field>
           <mat-form-field class="full-width">
-            <input matInput placeholder="Released" formControlName="Released" required name="Released"/>
-            <mat-error *ngIf="form.get('Released').dirty && form.get('Released').hasError('required')">
+            <input matInput placeholder="Year" formControlName="Year" required name="Year"/>
+            <mat-error *ngIf="form.get('Year').dirty && form.get('Year').hasError('required')">
               Released is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="form.get('Year').dirty && form.get('Year').hasError('pattern')">
+              Released number must be <strong>5 digits</strong>
             </mat-error>
           </mat-form-field>
           <mat-form-field class="full-width">
@@ -62,8 +65,17 @@
           </mat-form-field>
           <mat-form-field class="full-width">
             <input matInput placeholder="Metacritic" formControlName="Metascore" required name="Metascore"/>
-            <mat-error *ngIf="form.get('Metascore').dirty && form.get('Metascore').hasError('Metascore')">
+            <mat-error *ngIf="form.get('Metascore').dirty && form.get('Metascore').hasError('required')">
               Metacritic is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="form.get('Metascore').dirty && form.get('Metascore').hasError('pattern')">
+              Released number must be <strong>1,2 or 3 digits</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Poster" formControlName="Poster" required name="Poster"/>
+            <mat-error *ngIf="form.get('Poster').dirty && form.get('Poster').hasError('required')">
+              Poster is <strong>required</strong>
             </mat-error>
           </mat-form-field>
         </td>

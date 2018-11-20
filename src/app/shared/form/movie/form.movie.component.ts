@@ -148,8 +148,13 @@ export class FormMovieComponent implements OnInit, OnChanges {
       Title: new FormControl('', Validators.required),
       Genre: new FormControl('', Validators.required),
       Plot: new FormControl('', Validators.required),
-      Metascore: new FormControl('', Validators.required),
-      Released: new FormControl('', Validators.required)
+      Metascore: new FormControl('', Validators.compose([
+      Validators.required, Validators.pattern('\\d{1,3}')
+      ])),
+      Year: new FormControl('', Validators.compose([
+        Validators.required, Validators.pattern('\\d{4}')
+      ])),
+      Poster: new FormControl('', Validators.required)
     });
   }
 
