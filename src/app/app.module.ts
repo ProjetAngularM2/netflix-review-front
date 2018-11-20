@@ -14,6 +14,9 @@ import {CardComponent} from './shared/card/card.component';
 import {FormMovieComponent} from './shared/form/movie/form.movie.component';
 import {DialogMovieComponent} from './shared/dialog/movie/dialog.movie.component';
 import { UpdateComponent } from './update/update.component';
+import { FormRatingsComponent } from './shared/form/ratings/form.ratings.component';
+import { RateComponent } from './rate/rate.component';
+import {DialogRatingsComponent} from './shared/dialog/ratings/dialog.ratings.component';
 
 @NgModule({
   declarations: [
@@ -25,9 +28,12 @@ import { UpdateComponent } from './update/update.component';
     CardComponent,
     FormMovieComponent,
     DialogMovieComponent,
-    UpdateComponent
+    UpdateComponent,
+    FormRatingsComponent,
+    DialogRatingsComponent,
+    RateComponent
   ],
-  entryComponents: [ DialogUserComponent, DialogMovieComponent ],
+  entryComponents: [ DialogUserComponent, DialogMovieComponent, DialogRatingsComponent ],
   imports: [
     BrowserModule,
     AppRoutingModule,

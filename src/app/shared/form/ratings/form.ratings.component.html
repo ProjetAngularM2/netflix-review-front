@@ -1,0 +1,50 @@
+<h2 mat-dialog-title >Rate Movie</h2>
+
+
+<mat-dialog-content>
+
+  <form novalidate [formGroup]="form">
+
+    <p>
+      <span style="width:100%">Title (disabled)</span><br/>
+      <span style="width:100%">{{model.Title}}</span>
+    </p>
+
+    <table class="full-width" cellspacing="0">
+      <tr>
+        <td>
+
+          <mat-form-field class="full-width">
+            <input matInput placeholder="User" formControlName="User" required name="User"/>
+            <mat-error *ngIf="form.get('User').dirty && form.get('User').hasError('required')">
+              User is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Password" formControlName="Password" required name="Password"/>
+            <mat-error *ngIf="form.get('Password').dirty && form.get('Password').hasError('required')">
+              Password is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Rate" formControlName="Rate"  required name="Rate"/>
+            <mat-error *ngIf="form.get('Rate').dirty && form.get('Rate').hasError('required')">
+              Rate is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+
+
+        </td>
+      </tr>
+    </table>
+
+  </form>
+</mat-dialog-content>
+
+
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="cancel()">Cancel</button>
+  <button mat-button color="primary" type="submit" (click)="submit(form.value)" [disabled]="form.invalid">Save</button>
+</mat-dialog-actions>

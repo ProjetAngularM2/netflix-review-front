@@ -89,4 +89,14 @@ export class MoviesService {
   }
 
 
+  rate(subForm: any) {
+    const rate = {Source: subForm.rate.User, Value: subForm.rate.Rate};
+    if (subForm.m.Ratings == null) {
+      subForm.m.Ratings = [rate];
+    } else {
+      subForm.m.Ratings.push(rate);
+    }
+    // TODO check user
+    return this.update(subForm.m);
+  }
 }
