@@ -6,25 +6,47 @@
     </mat-card-title>
   </mat-card-title-group>
 
-
   <mat-card-content>
-    <div class="contact-info">
-      Year&nbsp;:&nbsp;<span> {{movie.Year}} </span>
+    <mat-card-content>
+      <div class="contact-info">
+        Year&nbsp;:&nbsp;<span> {{movie.Year}} </span>
+      </div>
+      <div class="contact-info">
+        Genre&nbsp;:&nbsp;<span> {{movie.Genre}} </span>
+      </div>
+      <div class="contact-info">
+        Plot&nbsp;:&nbsp;<span> {{movie.Plot}} </span>
+      </div>
+      <div class="contact-info">
+        Metacritic&nbsp;:&nbsp;<span> {{movie.Metascore}} </span>
+      </div>
+    </mat-card-content>
+    <div class="buttons-info">
+      <a mat-button title="Edit" (click)="navigate()">
+        <i class="material-icons">create</i>
+      </a>
+      <a mat-button title="Delete" (click)="delete(movie)">
+        <i class="material-icons">delete</i>
+      </a>
     </div>
-    <div class="contact-info">
-      Genre&nbsp;:&nbsp;<span> {{movie.Genre}} </span>
-    </div>
-    <div class="contact-info">
-      Plot&nbsp;:&nbsp;<span> {{movie.Plot}} </span>
-    </div>
-    <div class="contact-info">
-      Metacritic&nbsp;:&nbsp;<span> {{movie.Metascore}} </span>
-    </div>
-    <a mat-button title="Edit" (click)="navigate()">
-      <i class="material-icons">create</i>
-    </a>
-    <a mat-button title="Delete" (click)="delete(movie)">
-      <i class="material-icons">delete</i>
-    </a>
   </mat-card-content>
 </mat-card>
+
+<section *ngIf="!!movie.Ratings">
+
+  <mat-card class="mat-whiteframe-2dp">
+  <mat-card-title-group>
+    <mat-card-title>
+      <span>Ratings</span>
+    </mat-card-title>
+  </mat-card-title-group>
+  </mat-card>
+
+  <mat-card class="mat-whiteframe-2dp" *ngFor="let rating of movie.Ratings">
+    <mat-card-content>
+      <div class="contact-info">
+        {{rating.Source}}&nbsp;says " <span> {{rating.Value}}  </span> "
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>
