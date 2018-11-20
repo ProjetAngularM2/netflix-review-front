@@ -74,8 +74,8 @@ export class HomeComponent implements OnInit {
     if (movie.Title === undefined) {
       return this._moviesServie.fetchMovieByName(movie.search)
         .pipe(
-          flatMap((m: any) => this._moviesServie.fetchMovie(m.Search[0].imdbID)),
-          flatMap((m: Movie) => this._changeField(m))
+          flatMap((m: any) => m.Response === 'True' ? this._moviesServie.fetchMovie(m.Search[0].imdbID) : of(undefined)),
+          flatMap((m: any) => this._changeField(m))
         );
     } else {
       return this._moviesServie
@@ -86,16 +86,21 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  private _changeField(movie: Movie): Observable<Movie[]> {
-    const res = {
-      'Title': movie.Title,
-      'Year': movie.Year,
-      'Plot': movie.Plot,
-      'Poster': movie.Poster,
-      'Genre': movie.Genre,
-      'Metascore': movie.Metascore
-    };
-    return this._add(res);
+  private _changeField(movie: any): Observable<Movie[]> {
+    console.log(movie);
+    if (movie === undefined) {
+      return this._moviesServie.fetchAllMovie();
+    } else {
+      const res = {
+        'Title': movie.Title,
+        'Year': movie.Year,
+        'Plot': movie.Plot,
+        'Poster': movie.Poster,
+        'Genre': movie.Genre,
+        'Metascore': movie.Metascore
+      };
+      return this._add(res);
+    }
   }
 
 
