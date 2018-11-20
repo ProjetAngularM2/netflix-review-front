@@ -10,14 +10,8 @@ import {User} from '../interfaces/user';
 export class UsersService {
   // private property to store all backend URLs
   private readonly _backendURL: any;
-  // private property to store default person
-  private readonly _defaultUser: User;
 
   constructor(private _http: HttpClient) {
-    this._defaultUser = {
-      login: 'login',
-      password: 'paswword',
-    };
     this._backendURL = {};
 
     // build backend base url
@@ -31,23 +25,11 @@ export class UsersService {
   }
 
   /**
-   * Returns the default user value
-   */
-  get defaultUser(): User {
-    return this._defaultUser;
-  }
-
-  /**
    * Function to create a new person
    */
   create(user: User): Observable<any> {
     return this._http.post<User>(this._backendURL.registrationUser, user, this._options());
   }
-
-  connection(user: User): Observable<any> {
-    return this._http.post<User>(this._backendURL.connectionUser, user, this._options());
-  }
-
 
   /**
    * Function to return request options

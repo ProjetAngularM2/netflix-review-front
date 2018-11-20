@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MoviesService} from '../shared/services/movies.service';
 import {Movie} from '../shared/interfaces/movie';
 import {MatDialog, MatDialogRef} from '@angular/material';
-import {filter, flatMap} from 'rxjs/operators';
+import {filter, flatMap, map} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {DialogMovieComponent} from '../shared/dialog/movie/dialog.movie.component';
 import {Observable, of} from 'rxjs';
@@ -25,9 +25,12 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    for (let i = 0 ; i < 20 ; i = i + 1) {
+    /**
+     for (let i = 0 ; i < 20 ; i = i + 1) {
         this._moviesServie.fetchRandomMovie().subscribe((movie: Movie) => movie === undefined ? undefined : this._movies.push(movie));
     }
+     */
+    this._moviesServie.fetchAllMovie().subscribe((movies: Movie[]) => this._movies = movies);
   }
 
   get movies(): Movie[] {
@@ -38,7 +41,7 @@ export class HomeComponent implements OnInit {
    * Function to navigate to current person
    */
   navigate(movie: Movie) {
-    this._router.navigate([ '/movie', movie.imdbID ]);
+    this._router.navigate(['/movie', movie.imdbID]);
   }
 
   /**
@@ -60,23 +63,30 @@ export class HomeComponent implements OnInit {
         flatMap(_ => this._add(_))
       )
       .subscribe(
-        (_) => console.log(_));
+        (movies: Movie[]) => this._movies = movies);
   }
 
   /**
    * Add new movie
    */
-  private _add(movie: any): Observable<Movie> {
+  private _add(movie: any): Observable<Movie[]> {
+    movie.id = '0';
     if (movie.Title === undefined) {
       console.log('Search');
-      // todo requête serveur pour cherhcer le film via api en ligne puis ajouter à la base
+      // movieSearch.id = '0';
+      return this._moviesServie.fetchMovieByName(movie.search)
+        .pipe(
+          flatMap((m: any) => this._add(m.Search[0]))
+        );
     } else {
-      console.log('Movie');
-      // todo add movie
+      console.log(movie);
+      return this._moviesServie
+        .create(movie)
+        .pipe(
+          flatMap(_ => this._moviesServie.fetchAllMovie())
+        );
     }
-    return of(movie);
   }
-
 
 
 }
