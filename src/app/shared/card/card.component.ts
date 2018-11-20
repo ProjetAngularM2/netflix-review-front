@@ -1,10 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {Observable, of} from 'rxjs';
-import {filter, flatMap} from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
 import {Movie} from '../interfaces/movie';
-import {DialogMovieComponent} from '../dialog/movie/dialog.movie.component';
-import {MatDialog, MatDialogRef} from '@angular/material';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-card',
@@ -19,7 +15,7 @@ export class CardComponent implements OnInit {
   /**
    * Component constructor
    */
-  constructor() {
+  constructor(private _router: Router) {
     this._movie = {} as Movie;
   }
 
@@ -36,6 +32,10 @@ export class CardComponent implements OnInit {
   @Input()
   set movie(movie: Movie) {
     this._movie = movie;
+  }
+
+  navigate() {
+    this._router.navigate(['/movie', this._movie.imdbID]);
   }
 
   /**
