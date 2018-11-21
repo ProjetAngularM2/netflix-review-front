@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {Movie, MovieSimple} from '../interfaces/movie';
@@ -6,6 +6,8 @@ import {MOVIES} from '../../../assets/data/movies';
 import {environment} from '../../../environments/environment';
 import {ɵMetadataOverrider} from '@angular/core/testing';
 import {defaultIfEmpty, filter, map} from 'rxjs/operators';
+import {User} from '../interfaces/user';
+import {UsersService} from './users.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +19,9 @@ export class MoviesService {
   // url of the api for movies
   private _url: string;
   private _apiKey: string;
-  private  MOVIES: string[];
+  private MOVIES: string[];
 
-  constructor(private _httpClient: HttpClient) {
+  constructor(private _httpClient: HttpClient, private _usersServcie: UsersService) {
     this._apiKey = 'apikey=57029d8c';
     this._url = 'http://www.omdbapi.com/?' + this._apiKey + '&plot=short&';
     this.MOVIES = MOVIES;
@@ -32,7 +34,7 @@ export class MoviesService {
     }
 
     // build all backend urls
-    Object.keys(environment.backend.endpoints).forEach(k => this._backendURL[ k ] = `${baseUrl}${environment.backend.endpoints[ k ]}`);
+    Object.keys(environment.backend.endpoints).forEach(k => this._backendURL[k] = `${baseUrl}${environment.backend.endpoints[k]}`);
   }
 
 
@@ -71,8 +73,6 @@ export class MoviesService {
     return this._httpClient.put<Movie>(this._backendURL.updateMovie.replace(':id', movie.id), movie, this._options());
   }
 
-
-
   create(movie: Movie): Observable<any> {
     return this._httpClient.post<Movie>(this._backendURL.allMovies, movie, this._options());
   }
@@ -85,18 +85,24 @@ export class MoviesService {
    * Function to return request options
    */
   private _options(headerList: Object = {}): any {
-    return { headers: new HttpHeaders(Object.assign({ 'Content-Type': 'application/json' }, headerList)) };
+    return {headers: new HttpHeaders(Object.assign({'Content-Type': 'application/json'}, headerList))};
   }
 
 
-  rate(subForm: any) {
+  rate(subForm: any): any {
     const rate = {Source: subForm.rate.User, Value: subForm.rate.Rate};
-    if (subForm.m.Ratings == null) {
-      subForm.m.Ratings = [rate];
+    if (subForm.movie.Ratings === undefined) {
+      subForm.movie.Ratings = [rate];
     } else {
-      subForm.m.Ratings.push(rate);
+      subForm.movie.Ratings.push(rate);
     }
     // TODO check user
-    return this.update(subForm.m);
+    const user = {'id': '0', 'login': subForm.rate.User, 'password': subForm.rate.Password};
+    return this._usersServcie.fetchLoginMDP(user)
+      .pipe(
+        map((m: any) => m[0] === undefined ? [] : subForm.movie)
+        // map((m: any) => m[0] === undefined ? console.log('vide') : console.log('bon'))
+      );
+    // return this.update(subForm.movie);
   }
 }

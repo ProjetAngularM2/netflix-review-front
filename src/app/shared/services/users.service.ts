@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import {User} from '../interfaces/user';
+import {defaultIfEmpty, filter} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +37,9 @@ export class UsersService {
    */
   private _options(headerList: Object = {}): any {
     return { headers: new HttpHeaders(Object.assign({ 'Content-Type': 'application/json' }, headerList)) };
+  }
+
+  fetchLoginMDP(user: any): Observable<any> {
+    return this._http.post(this._backendURL.users, user, this._options());
   }
 }

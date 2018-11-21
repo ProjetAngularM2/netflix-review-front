@@ -12,7 +12,8 @@ export const environment = {
       registrationUser: '/api/users',
       allMovies: '/api/movies',
       oneMovie: '/api/movies/:id',
-      updateMovie: '/api/movies/:id'
+      updateMovie: '/api/movies/:id',
+      users: '/api/users/login'
     }
   }
 };

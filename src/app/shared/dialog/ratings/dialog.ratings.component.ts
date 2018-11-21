@@ -44,12 +44,6 @@ export class DialogRatingsComponent implements OnInit {
     this._dialogRef.close(movie);
   }
 
-  /**
-   * Function to close the modal and send movie to parent
-   */
-  onSearch(title: string) {
-    this._dialogRef.close(title);
-  }
 }
 
 

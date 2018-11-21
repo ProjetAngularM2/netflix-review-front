@@ -5,6 +5,7 @@ import {MoviesService} from '../shared/services/movies.service';
 import {filter, flatMap, map} from 'rxjs/operators';
 import {Movie} from '../shared/interfaces/movie';
 import {DialogRatingsComponent} from '../shared/dialog/ratings/dialog.ratings.component';
+import {of} from 'rxjs';
 
 @Component({
   selector: 'app-rate',
@@ -42,7 +43,9 @@ export class RateComponent implements OnInit {
         this._ratingsDialog.afterClosed()
           .pipe(
             filter(_ => !!_),
-            flatMap(_ => this._moviesService.rate(_))
+            flatMap(_ => this._moviesService.rate(_)),
+            flatMap((m: any) => m.id === undefined ? of(m) : this._moviesService.update(m))
+            // map((m: any) => m.id === undefined ? console.log('vide') : console.log(m))
           )
           .subscribe(null, null, () => this._router.navigate([ '/home' ]));
       });
