@@ -53,14 +53,23 @@ export class MoviesService {
     return this._httpClient.get<Movie>(this._url + 'i=' + id);
   }
 
+  /**
+   * fetch the movie with the name in parameter from the omdbAPI
+   */
   fetchMovieByName(name: string) {
     return this._httpClient.get<Movie>(this._url + 's=' + name);
   }
 
+  /**
+   * fetch the movie with the id in parameter from the BDD (Backend)
+   */
   fetchOne(id: string): Observable<Movie> {
     return this._httpClient.get<Movie>(this._backendURL.oneMovie.replace(':id', id));
   }
 
+  /**
+   * fetch all movies from the BDD (Backend)
+   */
   fetchAllMovie(): Observable<Movie[]> {
     return this._httpClient.get<Movie[]>(this._backendURL.allMovies)
       .pipe(
@@ -69,14 +78,23 @@ export class MoviesService {
       );
   }
 
+  /**
+   * update movie with the movie in parameter
+   */
   update(movie: Movie): Observable<any> {
     return this._httpClient.put<Movie>(this._backendURL.updateMovie.replace(':id', movie.id), movie, this._options());
   }
 
+  /**
+   * create movie into the BDD
+   */
   create(movie: Movie): Observable<any> {
     return this._httpClient.post<Movie>(this._backendURL.allMovies, movie, this._options());
   }
 
+  /**
+   * delete movie into the BDD
+   */
   delete(movie: Movie): Observable<any> {
     return this._httpClient.delete(this._backendURL.updateMovie.replace(':id', movie.id));
   }
@@ -89,6 +107,9 @@ export class MoviesService {
   }
 
 
+  /**
+   * Add rate on the movie into the BDD
+   */
   rate(subForm: any): any {
     const rate = {Source: subForm.rate.User, Value: subForm.rate.Rate};
     if (subForm.movie.Ratings === undefined) {

@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
   }
 
   /**
-   * Function to navigate to current person
+   * Function to navigate to current movie
    */
   navigate(movie: Movie) {
     this._router.navigate(['/movie', movie.id]);
@@ -86,6 +86,9 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  /**
+   * keep general information
+   */
   private _changeField(movie: any): Observable<Movie[]> {
     if (movie === undefined) {
       return this._moviesServie.fetchAllMovie();
