@@ -48,8 +48,7 @@ export class AppComponent implements OnInit {
         filter(_ => !!_),
         flatMap(_ => this._add(_))
       )
-      .subscribe(
-        (_) => console.log(_.login));
+      .subscribe(null, (error: Error) => alert('Erreur lors de l\'inscription'));
   }
 
   /**

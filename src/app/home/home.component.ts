@@ -87,7 +87,6 @@ export class HomeComponent implements OnInit {
   }
 
   private _changeField(movie: any): Observable<Movie[]> {
-    console.log(movie);
     if (movie === undefined) {
       return this._moviesServie.fetchAllMovie();
     } else {
